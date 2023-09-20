@@ -19,7 +19,7 @@ Develop a ubiquitous language for the domain of a slide show.
 |  |  | slide show title |
 |  |  | optional subtitle |
 |  |  | number of slides |
-| slide meta information |  | current slide number |  |
+| slide meta |  | current slide number |  |
 |  |  | slide title |  |
 | content item | list | can contain bullets |  |
 |  |  | has levels |  |

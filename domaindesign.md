@@ -12,7 +12,6 @@ Make a design for the entities in the domain of slide shows.
 |------|----------------|----------|---------|
 | Know | its slides |  |  |
 |  | its meta information |  |  |
-| Can | start |  | **ErikH** If I read the assignment correctly, the slide show application is started with a file parameter that contains the slide show to be shown. Do you think we should have a separate action on the slide show class to actually _start_ the slide show? I think it should automatically be started once the application starts. <br>**MelvinM** Agreed. In the assignment they don't talk about a start action. You want to support all kind of user configured slide shows, so I would say just make a config of a slide show and load that in. But thats a topic in a later fase ;)|
 |  | stop |  |  |
 |  | show next slide |  |  |
 |  | show previous slide |  |  |
@@ -98,23 +97,24 @@ class Slide{
 classDiagram
 class Content{
 	<<abstract>>
-	+show()}
+	+getComposite(): CompositeContent|null
+}
 class CompositeContent{
 	-elements : Vector of Content
-	+show()
-        +getIterator():Iterator of Content
+    +getIterator():Iterator of Content
 }
 class List{
-	+show()
+    -bulleted: boolean
 }
 class Table{
-	+show()
+    -rowCount: int
+    -columnCount: int
 }
 class Figure{
-	+show()
+    -source: URL
 }
 class Text{
-	+show()
+    -text: String
 }
 Content <|-- Figure
 Content <|-- Text

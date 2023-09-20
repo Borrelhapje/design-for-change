@@ -11,7 +11,8 @@ Develop a ubiquitous language for the domain of a slide show.
 |  |  | has slide show meta information |  |
 | slide |  | shows information |  |
 |  |  | has slide meta information |  |
-|  | title slide | shows _only_ meta information in a big format | likely generated based on meta information? |
+|  | title slide | shows _only_ meta information or part of it in a big format | likely generated based on meta information? |
+|  | table of contents slide | shows the titles of the ordinary slides in order                                           | likely generated based on meta information? |
 |  | ordinary slide | contains standard slide elements alongside part (or possibly all) of the meta information. |  |
 |  |  | contains one or more content items |  |
 | slide show meta | | date |
@@ -32,6 +33,7 @@ Develop a ubiquitous language for the domain of a slide show.
 ```mermaid
 classDiagram
   Slide <|-- TitleSlide
+  Slide <|-- ToCSlide
   Slide <|-- OrdinarySlide
 
   ContentItem <|-- List

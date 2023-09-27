@@ -12,7 +12,7 @@ Develop a ubiquitous language for the domain of a slide show.
 |  |  | title |
 |  |  | optional subtitle |
 |  |  | number of slides |
-|  | meta information | the set of slide show attributes that can be used outside the slide show itself, e.g. for generated content | Meta information is strongly linked to the slide show. Whether or not is will be modeled as a separate class in the design model, does not need to influence where it is mentioned in the UL. Mentioning it as a separate concept probably just confuses the domain experts. |
+|  | meta information | the set of slide show attributes that can be used outside the slide show itself, e.g. for generated content | Meta information is strongly linked to the slide show. Whether or not it will be modeled as a separate class in the design model, does not need to influence where it is mentioned in the UL. Mentioning it as a separate concept probably just confuses the domain experts. |
 | slide |  | a single page of information formed by a content item, optionally combined with generated content based on meta information |  |
 |  |  | current slide number |  |
 |  |  | slide title |  |

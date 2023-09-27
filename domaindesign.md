@@ -12,8 +12,7 @@ Make a design for the entities in the domain of slide shows.
 |------|----------------|----------|---------|
 | Know | its slides |  |  |
 |  | its meta information |  |  |
-| Can  | stop                  |  |  |
-|  | supply slide iterator |  |  |
+| Can  | supply slide iterator                  |  |  |
 
 ## Slide Iterator
 
@@ -68,8 +67,6 @@ classDiagram
         -meta : SlideShowMeta
         +getSlideIterator(): Iterator of Slide
         +getMeta()
-        +start()
-        +stop()
     }
 class Slide{
 	-content : Content

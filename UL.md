@@ -8,27 +8,26 @@ Develop a ubiquitous language for the domain of a slide show.
 |---------|-------------|---------|---------|
 | slide show |  | an ordered sequence of slides |  |
 |  |  | has a title |  |
-|  |  | has slide show meta information |  |
-| slide |  | shows information |  |
-|  |  | has slide meta information |  |
-|  | title slide | shows _only_ meta information or part of it in a big format | likely generated based on meta information? |
-|  | table of contents slide | shows the titles of the ordinary slides in order                                           | likely generated based on meta information? |
-|  | ordinary slide | contains standard slide elements alongside part (or possibly all) of the meta information. |  |
-|  |  | contains one or more content items |  |
-| slide show meta | | date |
 |  |  | name(s) of presenter(s) |
-|  |  | slide show title |
+|  |  | title |
 |  |  | optional subtitle |
 |  |  | number of slides |
-| slide meta |  | current slide number |  |
+|  | meta information | the set of slide show attributes that can be used outside the slide show itself, e.g. for generated content | Meta information is strongly linked to the slide show. Whether or not it will be modeled as a separate class in the design model, does not need to influence where it is mentioned in the UL. Mentioning it as a separate concept probably just confuses the domain experts. |
+| slide |  | a single page of information formed by a content item, optionally combined with generated content based on meta information |  |
+|  |  | current slide number |  |
 |  |  | slide title |  |
-| content item | list | can contain bullets |  |
+|  | meta information | the set of slide show attributes that can be used outside the slide show itself, e.g. for generated content | See remark for slide show meta information. |
+|  | title slide | shows _only_ meta information or part of it in a styling that may differ from the style of ordinary slides |  |
+|  | table of contents slide | shows the titles of the ordinary slides in order                                           |  |
+|  | ordinary slide | contains a single content item alongside part or all of the meta information. |  |
+| content item | list | can be a bulleted list |  |
 |  |  | has levels |  |
 |  |  | has indenting based on level |  |
-|  |  | has font size based on level |  |
-|  | figure | has reference to source |  |
+|  |  | has styling based on level |  |
+|  | figure | has reference to an image source |  |
 |  | table | information in table format |  |
 |  | text | information as text |  |
+| presenter(s) |  | the person(s) presenting the slide show |  |
 
 ```mermaid
 classDiagram
@@ -43,7 +42,8 @@ classDiagram
 
   Slide "1" --> "*" ContentItem : slideItems
   SlideShow "1" --> "*" Slide : slides
-  List "1" --> "*" ContentItem : listItems
+  List "1" --> "*" ContentItem : listContentItems
+  Table "1" --> "*" ContentItem : tableContentItems
 ```
 
 # Actions
@@ -92,14 +92,14 @@ classDiagram
 
 ## Next slide rule
 
-This rule is a _action rule_ for the _Next slide action_.
+This rule is an _action rule_ for the _Next slide action_.
 
 - in general: The conditions that determine if the next slide action is possible.
 - specific: Possible if there is a next slide
 
 ## Previous slide rule
 
-This rule is a _action rule_ for the _Previous slide action_.
+This rule is an _action rule_ for the _Previous slide action_.
 
 - in general: The conditions that determine if the previous slide action is possible.
 - specific: Possible if there is a previous slide

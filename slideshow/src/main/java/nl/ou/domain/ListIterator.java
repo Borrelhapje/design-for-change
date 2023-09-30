@@ -18,7 +18,7 @@ public class ListIterator<T> implements Iterator<T> {
 
         @Override
         public boolean hasNext() {
-            return position < slides.size();
+            return position < slides.size() - 1;
         }
         @Override
         public boolean hasPrevious() {

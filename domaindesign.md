@@ -12,9 +12,16 @@ Make a design for the entities in the domain of slide shows.
 |------|----------------|----------|---------|
 | Know | its slides |  |  |
 |  | its meta information |  |  |
-|  | stop |  |  |
-|  | show next slide |  |  |
-|  | show previous slide |  |  |
+| Can  | supply slide iterator                  |  |  |
+
+## Slide Iterator
+
+| Type | Responsibility          | Comments | Remarks |
+|------|-------------------------|----------|---------|
+| Know | slides                  |  |  |
+|      | current slide           | | |
+| can  | navigate through slides |  |  |
+
 
 ## Slide
 
@@ -22,7 +29,7 @@ Make a design for the entities in the domain of slide shows.
 |------|----------------|----------|---------|
 | Know | its content |  |  |
 |  | its meta information | title, slide number |  |
-| Can | render its content |  |  |
+| Can |  |  |  |
 
 ## Content
 
@@ -30,7 +37,7 @@ Make a design for the entities in the domain of slide shows.
 |------|----------------|----------|---------|
 | Know | information to be shown | for text and image |  |
 |  | child content items | for table and list |  |
-| Can | render its content | |  |
+| Can | supply content iterator | |  |
 
 ## SlideShow Meta
 | Type | Responsibility | Comments |
@@ -39,49 +46,47 @@ Make a design for the entities in the domain of slide shows.
 |      | subtitle | |
 |      | presenter names | |
 |      | date | |
-| Can | be shown | |
+| Can |  | |
 
 ## Slide Meta
 | Type | Responsibility | Comments |
 |------|----------------|----------|
 | Know | title | |
 |      | slide number in sequence | |
-| Can | be shown | |
+| Can |  | |
 
 # Design
 
-## Slide show
-
-```mermaid
-classDiagram
-class SlideShow{
-	-slides : Vector of Slide
-	-meta : SlideShowMeta
-        +getSlideIterator(): Iterator of Slide
-        +getMeta()
-	+start()
-	+stop()
-}
-```
-- Design pattern **Iterator** for navigation over the slides?
-
-## Slide
+## Slide show and slide
 - I doubt we will need anything more complex than a Slide, as Content should be able to handle any table of contents, title slide or other special slides 
 
 ```mermaid
 classDiagram
+    class SlideShow{
+        -slides : Vector of Slide
+        -meta : SlideShowMeta
+        +getSlideIterator(): Iterator of Slide
+        +getMeta()
+    }
 class Slide{
 	-content : Content
         -meta: SlideMeta
         +getMeta(): SlideMeta
         +getContent(): Content
 }
+class Content{
+  <<abstract>>
+}
+
+SlideShow "1" <-- "*" Slide: slides
+Slide "1" <-- "1" Content: content
 ```
 
 ## Content
 
 - Design pattern **Composite** for content and its subtypes.
 - **Iterator** to navigate through these
+- It is a possibility to include Slide and even SlideShow into the Composite hierarchy. We decided against that, because we see too much difference between Slide/SlideShow and the other Components and too little shared functionality.
 
 ### Mapping for Composite
 
@@ -128,21 +133,44 @@ CompositeContent <|-- Table
 classDiagram
 class Iterator{
   <<abstract>>
+  +hasNext():boolean
   +next():boolean
+  +hasPrevious(): boolean
   +previous():boolean
   +current(): T|null
 }
-class ListIterator {
+class ContentIterator{
+  <<abstract>>
+  +hasNext():boolean
   +next():boolean
+  +hasPrevious(): boolean
+  +previous():boolean
+  +current(): Content|null
+}
+class ListIterator {
+  +hasNext():boolean
+  +next():boolean
+  +hasPrevious(): boolean
   +previous():boolean
   +current(): Content|null
 }
 class TableIterator {
+  +hasNext():boolean
   +next():boolean
+  +hasPrevious(): boolean
   +previous():boolean
   +current(): Content|null
 }
+class SlideIterator {
+  +hasNext():boolean
+  +next():boolean
+  +hasPrevious(): boolean
+  +previous():boolean
+  +current(): Slide|null
+}
 
-Iterator <|-- ListIterator
-Iterator <|-- TableIterator
+    Iterator <|-- SlideIterator
+    Iterator <|-- ContentIterator
+    ContentIterator <|-- ListIterator
+    ContentIterator <|-- TableIterator
 ```

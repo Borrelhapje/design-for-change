@@ -174,3 +174,42 @@ class SlideIterator {
     ContentIterator <|-- ListIterator
     ContentIterator <|-- TableIterator
 ```
+
+## Rules
+
+### Next slide rule
+This rule does not need an explicit implementation. Is it implicit in the SlideIterator that is provided by the SlideShow. We do not foresee any situation where an explicit Rule class for this would provide benefits over using an Iterator.
+
+### Previous slide rule
+This rule does not need an explicit implementation, for the same reason as the Next slide rule.
+
+## StopStrategy
+This strategy pattern is used to give options to the application on what to do when the slide show presentation is stopped.
+I do not yet know which class wil be responsible for calling methods on the StopStrategy. I guess that will be done from a (not yet existing) GUIManager class.
+
+### ExitApplicationStopStrategy
+A StopStrategy that simply exits the application.
+
+### SelectSlideShowStopStrategy
+A StopStrategy that allows the user to select a new slide show to be presented.
+Note that if we want to support multiple UIs, that this will require a UI class/interface that supports this.
+That means we will probably need a Bridge pattern somewhere.
+
+~~~mermaid
+classDiagram
+    class StopStrategy{
+        <<Interface>>
+        +stop()
+    }
+    
+    class ExitApplicationStopStrategy {
+        +stop()
+    }
+
+    class SelectSlideShowStopStrategy {
+        +stop()
+    }
+
+StopStrategy <|-- ExitApplicationStopStrategy
+    StopStrategy <|-- SelectSlideShowStopStrategy
+~~~

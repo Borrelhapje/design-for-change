@@ -159,6 +159,7 @@ class TableIterator {
   +previous():boolean
   +current(): Content|null
   +endOfRow(): boolean
+  +startOfRow(): boolean
   +nextRow(): boolean
   +previousRow(): boolean
 }

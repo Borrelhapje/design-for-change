@@ -3,6 +3,8 @@ package nl.ou.domain;
 import java.util.List;
 import java.util.Optional;
 
+import nl.ou.domain.impl.ListIterator;
+
 public class ListContent implements CompositeContent {
 
     private List<Content> elements;

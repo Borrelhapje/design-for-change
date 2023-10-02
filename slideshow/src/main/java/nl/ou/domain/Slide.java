@@ -1,17 +1,9 @@
 package nl.ou.domain;
 
-public class Slide {
+public interface Slide {
 
-    private Content content;
+    Content getContent();
 
-    private SlideMeta slideMeta;
-
-    public Content getContent() {
-        return content;
-    }
-
-    public SlideMeta getMeta() {
-        return slideMeta;
-    }
+    SlideMeta getMeta();
     
 }

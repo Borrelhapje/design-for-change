@@ -63,14 +63,12 @@ Make a design for the entities in the domain of slide shows.
 ```mermaid
 classDiagram
     class SlideShow{
-        -slides : Vector of Slide
-        -meta : SlideShowMeta
+        <<abstract>>
         +getSlideIterator(): Iterator of Slide
         +getMeta()
     }
 class Slide{
-	-content : Content
-        -meta: SlideMeta
+        <<abstract>>
         +getMeta(): SlideMeta
         +getContent(): Content
 }
@@ -160,6 +158,9 @@ class TableIterator {
   +hasPrevious(): boolean
   +previous():boolean
   +current(): Content|null
+  +endOfRow(): boolean
+  +nextRow(): boolean
+  +previousRow(): boolean
 }
 class SlideIterator {
   +hasNext():boolean

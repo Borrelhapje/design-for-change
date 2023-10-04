@@ -7,6 +7,10 @@ public abstract class AbstractSlide implements Slide {
 
     private SlideMeta meta;
 
+    public AbstractSlide(SlideMeta meta) {
+        this.meta = meta;
+    }
+
     @Override
     public SlideMeta getMeta() {
         return meta;

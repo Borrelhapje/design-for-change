@@ -7,6 +7,10 @@ public class Figure implements Content{
 
     private URI source;
 
+    public Figure(URI source) {
+        this.source = source;
+    }
+
     @Override
     public Optional<CompositeContent> getComposite() {
         return Optional.empty();

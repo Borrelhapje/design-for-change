@@ -7,6 +7,10 @@ public class TableContent implements CompositeContent {
 
     private List<List<Content>> table;
 
+    public TableContent(List<List<Content>> table) {
+        this.table = table;
+    }
+
     @Override
     public Optional<CompositeContent> getComposite() {
         return Optional.of(this);

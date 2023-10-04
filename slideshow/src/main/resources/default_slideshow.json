@@ -1,0 +1,55 @@
+{
+  "title": "Demo Presentation",
+  "showTitleSlide": false,
+  "showTOCSlide": false,
+  "slides": [
+    {
+      "title": "JabberPoint",
+      "content": {
+        "type": "list",
+        "bulleted": "false",
+        "items": [
+          {
+            "type": "text",
+            "text": "Het Java Presentatie Tool"
+          },
+          {
+            "type": "list",
+            "items": [
+              {
+                "type": "text",
+                "text": "Copyright (c) 1996-2000: Ian Darwin"
+              },
+              {
+                "type": "text",
+                "text": "Copyright (c) 2000-now:"
+              },
+              {
+                "type": "text",
+                "text": "Gert Florijn en Sylvia Stuurman"
+              },
+              {
+                "type": "text",
+                "text": "Het Java Presentatie Tool"
+              },
+              {
+                "type": "list",
+                "bullets": "false",
+                "items": [
+                  {
+                    "type": "text",
+                    "text": "JabberPoint aanroepen zonder bestandsnaam"
+                  },
+                  {
+                    "type": "text",
+                    "text": "laat deze presentatie zien"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "title": "Demo Presentation",
+  "subtitle": "Showing off JabberPoint",
+  "presenter": "No one specifically",
+  "date": "2023-02-28",
+  "showTitleSlide": true,
+  "showTOCSlide": true,
+  "slides": [
+    {
+      "title": "JabberPoint",
+      "content": {
+        "type": "list",
+        "bulleted": "true",
+        "items": [
+          {
+            "type": "text",
+            "text": "Het Java Presentatie Tool"
+          },
+          {
+            "type": "list",
+            "items": [
+              {
+                "type": "text",
+                "text": "Copyright (c) 1996-2000: Ian Darwin"
+              },
+              {
+                "type": "text",
+                "text": "Copyright (c) 2000-now:"
+              },
+              {
+                "type": "text",
+                "text": "Gert Florijn en Sylvia Stuurman"
+              },
+              {
+                "type": "text",
+                "text": "Het Java Presentatie Tool"
+              },
+              {
+                "type": "list",
+                "bullets": "false",
+                "items": [
+                  {
+                    "type": "text",
+                    "text": "JabberPoint aanroepen zonder bestandsnaam"
+                  },
+                  {
+                    "type": "text",
+                    "text": "laat deze presentatie zien"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Second slide, containing a figure",
+      "content": {
+        "type": "figure",
+        "url": "https://i.imgur.com/lZceiDL.jpeg"
+      }
+    },
+    {
+      "title": "Third slide, containing a table with a nested list",
+      "content": {
+        "type": "table",
+        "rows": [
+          [
+            {
+              "type": "text",
+              "text": "row 1 column 1"
+            },
+            {
+              "type": "text",
+              "text": "row 1 column 2"
+            }
+          ],
+          [
+            {
+              "type": "text",
+              "text": "row 2 column 1"
+            }
+          ],
+          [
+            {
+              "type": "text",
+              "text": "row 3 column 1"
+            },
+            {
+              "type": "text",
+              "text": "row 3 column 2"
+            },
+            {
+              "type": "list",
+              "items": [
+                {
+                  "type": "text",
+                  "text": "List item 1"
+                },
+                {
+                  "type": "text",
+                  "text": "List item 2"
+                },
+                {
+                  "type": "text",
+                  "text": "List item 3"
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    }
+  ]
+}

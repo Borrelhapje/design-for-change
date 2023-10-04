@@ -1,11 +1,13 @@
-package nl.ou.domain;
+package nl.ou.domain.impl;
 
 import java.util.List;
 import java.util.Objects;
 
+import nl.ou.domain.Iterator;
+
 public class ListIterator<T> implements Iterator<T> {
 
-    ListIterator(List<T> slides) {
+    public ListIterator(List<T> slides) {
         this.slides = Objects.requireNonNull(slides);
     }
     

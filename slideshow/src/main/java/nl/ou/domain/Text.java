@@ -6,6 +6,10 @@ public class Text implements Content{
     
     private String text;
 
+    public Text(String text) {
+        this.text = text;
+    }
+
     @Override
     public Optional<CompositeContent> getComposite() {
         return Optional.empty();

@@ -5,5 +5,7 @@ import java.util.Optional;
 public interface Content {
 
     Optional<CompositeContent> getComposite();
+
+    void accept(ContentVisitor visitor);
     
 }

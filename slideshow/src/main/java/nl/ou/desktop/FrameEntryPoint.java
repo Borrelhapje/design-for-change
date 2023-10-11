@@ -7,6 +7,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import nl.ou.domain.Iterator;
 import nl.ou.domain.Slide;
@@ -33,6 +34,8 @@ public class FrameEntryPoint {
                 facade.getStopStrategy().stop();
             }
         });
+        final var panel = new JPanel();
+        frame.add(panel);
         final var nextButton = new JButton(new AbstractAction() {
             public boolean isEnabled() {
                 return iterator.hasNext();
@@ -44,7 +47,7 @@ public class FrameEntryPoint {
             }
         });
         nextButton.setText("Next");
-        frame.add(nextButton);
+        panel.add(nextButton);
         final var prevButton = new JButton(new AbstractAction() {
             public boolean isEnabled() {
                 return iterator.hasPrevious();
@@ -56,7 +59,11 @@ public class FrameEntryPoint {
             }
         });
         prevButton.setText("Back");
-        frame.add(prevButton);
+        panel.add(prevButton);
+        frame.setVisible(true);
+        frame.setAutoRequestFocus(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(800, 800);
         return frame;
     }
     

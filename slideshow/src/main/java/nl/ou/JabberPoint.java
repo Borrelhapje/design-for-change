@@ -1,8 +1,6 @@
 package nl.ou;
 
 import nl.ou.desktop.FrameEntryPoint;
-import nl.ou.domain.Iterator;
-import nl.ou.domain.Slide;
 import nl.ou.domain.SlideShow;
 import nl.ou.domain.StopStrategy;
 import nl.ou.domain.SystemExitStrategy;

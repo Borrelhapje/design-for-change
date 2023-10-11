@@ -15,4 +15,13 @@ public class Text implements Content{
         return Optional.empty();
     }
 
+    public String getText() {
+        return text;
+    }
+
+    @Override
+    public void accept(ContentVisitor visitor) {
+        visitor.doForText(this);
+    }
+
 }

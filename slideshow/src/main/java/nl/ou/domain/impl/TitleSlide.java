@@ -1,12 +1,14 @@
 package nl.ou.domain.impl;
 
-import nl.ou.domain.Content;
-import nl.ou.domain.SlideMeta;
-import nl.ou.domain.SlideshowMeta;
+import nl.ou.domain.*;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class TitleSlide extends AbstractSlide {
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
-    private SlideshowMeta showMeta;
+    private final SlideshowMeta showMeta;
 
     public TitleSlide(SlideshowMeta showMeta) {
         super(null);
@@ -15,7 +17,24 @@ public class TitleSlide extends AbstractSlide {
 
     @Override
     public Content getContent() {
-        //genereer uit showMeta?
-        return null;
+        Text title = new Text(showMeta.getTitle());
+        Text subtitle = new Text(showMeta.getSubtitle());
+        Text presenter = new Text(showMeta.getPresenter());
+        Text date = showMeta.getDate() != null ? new Text(showMeta.getDate().format(dateTimeFormatter)) : null;
+
+        return createListContent(
+                title,
+                createListContent(
+                        subtitle,
+                        createListContent(
+                                presenter,
+                                date
+                        )
+                )
+        );
+    }
+
+    private ListContent createListContent(Content... elements) {
+        return new ListContent(List.of(elements), false);
     }
 }

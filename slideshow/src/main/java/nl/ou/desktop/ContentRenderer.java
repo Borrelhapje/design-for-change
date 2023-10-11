@@ -6,7 +6,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 
 import nl.ou.domain.CompositeContent;
@@ -38,15 +37,15 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     
     @Override
     public void startList(ListContent content) {
-        final var list = new JList();
+        final var list = new JPanel();
         current.add(list);     
         current = list;
     }
 
     @Override
     public void startTable(TableContent content) {
-        final var layout = new BoxLayout(current, BoxLayout.Y_AXIS);
-        final var table = new JPanel(layout);
+        // final var layout = new BoxLayout(current, BoxLayout.Y_AXIS);
+        final var table = new JPanel();
         current.add(table);
         current = table;
     }

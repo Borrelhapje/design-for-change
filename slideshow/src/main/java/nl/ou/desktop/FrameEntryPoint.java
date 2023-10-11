@@ -23,8 +23,8 @@ public class FrameEntryPoint {
     public FrameEntryPoint(GUIFacade facade) {
         this.facade = facade;
         this.iterator = facade.getSlideshow().getSlideIterator();
-        System.out.println(iterator.current().getClass());
         this.frame = renderFrame();
+        onSlideChange();
     }
 
     private JComponent renderFrame() {
@@ -72,7 +72,9 @@ public class FrameEntryPoint {
         if (slideShower != null) {
             frame.remove(slideShower);
         }
-        frame.add(new SlideRenderer(iterator.current()).getComponent());
+        slideShower = new SlideRenderer(iterator.current()).getComponent();
+        frame.add(slideShower);
+        frame.repaint();
     }
     
 }

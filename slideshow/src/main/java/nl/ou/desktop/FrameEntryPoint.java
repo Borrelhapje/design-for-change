@@ -74,7 +74,7 @@ public class FrameEntryPoint {
         }
         slideShower = new SlideRenderer(iterator.current()).getComponent();
         frame.add(slideShower);
-        frame.repaint();
+        frame.validate();
     }
     
 }

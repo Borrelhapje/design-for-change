@@ -17,16 +17,17 @@ public class FrameEntryPoint {
 
     private final GUIFacade facade;
     private final Iterator<Slide> iterator;
-    private final JFrame frame;
+    private final JComponent frame;
     private JComponent slideShower;
 
     public FrameEntryPoint(GUIFacade facade) {
         this.facade = facade;
         this.iterator = facade.getSlideshow().getSlideIterator();
+        System.out.println(iterator.current().getClass());
         this.frame = renderFrame();
     }
 
-    private JFrame renderFrame() {
+    private JComponent renderFrame() {
         final var frame = new JFrame("JabberPoint " + facade.getSlideshow().getMeta().getTitle());
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -64,7 +65,7 @@ public class FrameEntryPoint {
         frame.setAutoRequestFocus(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800, 800);
-        return frame;
+        return panel;
     }
     
     private void onSlideChange() {

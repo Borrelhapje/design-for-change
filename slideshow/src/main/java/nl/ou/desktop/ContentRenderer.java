@@ -39,21 +39,22 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     @Override
     public void startList(ListContent content) {
         final var list = new JList();
+        current.add(list);     
         current = list;
-        panel.add(list);     
     }
 
     @Override
     public void startTable(TableContent content) {
         final var layout = new BoxLayout(current, BoxLayout.Y_AXIS);
         final var table = new JPanel(layout);
+        current.add(table);
         current = table;
     }
     
     @Override
     public void startTableRow(TableContent content) {
-        final var layout = new BoxLayout(current, BoxLayout.X_AXIS);
-        final var row = new JPanel(layout);
+        final var row = new JPanel();
+        current.add(row);
         current = row;
     }
 

@@ -14,6 +14,7 @@ public class SlideRenderer implements ComponentCreator {
         this.component = panel;
         final var contentRenderer = new ContentRenderer();
         slide.getContent().accept(contentRenderer);
+        panel.add(contentRenderer.getComponent());
         panel.add(new SlideMetaRenderer(slide.getMeta()).getComponent());
     }
 

@@ -1,5 +1,6 @@
 package nl.ou.desktop;
 
+import java.awt.GridLayout;
 import java.net.MalformedURLException;
 
 import javax.swing.BoxLayout;
@@ -37,22 +38,24 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     
     @Override
     public void startList(ListContent content) {
-        final var list = new JPanel();
+        final var layout = new GridLayout(0, 1);
+        final var list = new JPanel(layout);
         current.add(list);     
         current = list;
     }
 
     @Override
     public void startTable(TableContent content) {
-        // final var layout = new BoxLayout(current, BoxLayout.Y_AXIS);
-        final var table = new JPanel();
+        final var layout = new GridLayout(0, 1);
+        final var table = new JPanel(layout);
         current.add(table);
         current = table;
     }
     
     @Override
     public void startTableRow(TableContent content) {
-        final var row = new JPanel();
+        final var layout = new GridLayout(1, 0);
+        final var row = new JPanel(layout);
         current.add(row);
         current = row;
     }

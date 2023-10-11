@@ -1,9 +1,12 @@
 package nl.ou.domain.impl;
 
 import nl.ou.domain.Content;
+import nl.ou.domain.ListContent;
 import nl.ou.domain.SlideMeta;
+import nl.ou.domain.Text;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TocSlide extends AbstractSlide {
 
@@ -16,7 +19,11 @@ public class TocSlide extends AbstractSlide {
 
     @Override
     public Content getContent() {
-        // genereer? of zetten we dat in een aparte class?
-        return null;
+        return new ListContent(
+                slideMetaList.stream()
+                        .map(SlideMeta::title)
+                        .map(Text::new)
+                        .collect(Collectors.toList())
+                , true);
     }
 }

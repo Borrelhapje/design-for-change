@@ -18,6 +18,8 @@ public class FrameEntryPoint {
     private final GUIFacade facade;
     private final Iterator<Slide> iterator;
     private final JComponent frame;
+    private JButton next;
+    private JButton previous;
     private JComponent slideShower;
 
     public FrameEntryPoint(GUIFacade facade) {
@@ -37,30 +39,24 @@ public class FrameEntryPoint {
         });
         final var panel = new JPanel();
         frame.add(panel);
-        final var nextButton = new JButton(new AbstractAction() {
-            public boolean isEnabled() {
-                return iterator.hasNext();
-            }
-
-            public void actionPerformed(java.awt.event.ActionEvent event) {
-                iterator.next();
-                onSlideChange();
-            }
-        });
-        nextButton.setText("Next");
-        panel.add(nextButton);
-        final var prevButton = new JButton(new AbstractAction() {
-            public boolean isEnabled() {
-                return iterator.hasPrevious();
-            }
+        previous = new JButton(new AbstractAction() {
 
             public void actionPerformed(java.awt.event.ActionEvent event) {
                 iterator.previous();
                 onSlideChange();
             }
         });
-        prevButton.setText("Back");
-        panel.add(prevButton);
+        previous.setText("Back");
+        next = new JButton(new AbstractAction() {
+
+            public void actionPerformed(java.awt.event.ActionEvent event) {
+                iterator.next();
+                onSlideChange();
+            }
+        });
+        next.setText("Next");
+        panel.add(next);
+        panel.add(previous);
         frame.setVisible(true);
         frame.setAutoRequestFocus(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,10 +67,14 @@ public class FrameEntryPoint {
     private void onSlideChange() {
         if (slideShower != null) {
             frame.remove(slideShower);
+            frame.invalidate();
         }
+        previous.setEnabled(iterator.hasPrevious());
+        next.setEnabled(iterator.hasNext());
         slideShower = new SlideRenderer(iterator.current()).getComponent();
         frame.add(slideShower);
-        frame.validate();
+        frame.revalidate();
+        frame.repaint();
     }
     
 }

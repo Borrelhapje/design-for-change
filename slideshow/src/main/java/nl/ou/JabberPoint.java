@@ -16,7 +16,7 @@ public class JabberPoint {
     public static void main(String[] args) {
         String fileName;
         if (args.length == 0 || args[0].trim().isEmpty()) {
-            fileName = "default_slideshow.json";
+            fileName = "all_elements_slideshow.json";
         } else {
             fileName = args[0].trim();
         }

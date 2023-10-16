@@ -2,12 +2,10 @@ package nl.ou;
 
 import nl.ou.desktop.FrameEntryPoint;
 import nl.ou.domain.SlideShow;
-import nl.ou.domain.StopStrategy;
-import nl.ou.domain.SystemExitStrategy;
 import nl.ou.infra.SlideReaderFactory;
 import nl.ou.infra.SlideShowReader;
 import nl.ou.infra.SlideShowReaderFormat;
-import nl.ou.services.GUIFacade;
+import nl.ou.services.AbstractGUIFacadeFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,17 +23,7 @@ public class JabberPoint {
         try (InputStream inputStream = ClassLoader.getSystemResourceAsStream(fileName)) {
             SlideShow slideShow = slideReader.readSlideShow(inputStream);
             System.out.println(slideShow);
-            new FrameEntryPoint(new GUIFacade() {
-                @Override
-                public SlideShow getSlideshow() {
-                    return slideShow;
-                }
-
-                @Override
-                public StopStrategy getStopStrategy() {
-                    return new SystemExitStrategy();
-                }
-            });
+            new FrameEntryPoint(AbstractGUIFacadeFactory.getFactory().create(slideShow));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

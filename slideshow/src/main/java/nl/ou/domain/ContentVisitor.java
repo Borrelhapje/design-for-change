@@ -6,24 +6,24 @@ public interface ContentVisitor {
      * action if a list is encountered
      * @param content
      */
-    void startList(ListContent content);
+    void doForListStart(ListContent content);
+
+    void doForListEnd(ListContent content);
 
     /**
      * action for when a table is encountered
      * @param content
      */
-    void startTable(TableContent content);
+    void doForTableStart(TableContent content);
+
+    void doForTableEnd(TableContent content);
 
     /**
      * called when a new table row is encountered
      */
-    void startTableRow(TableContent content);
+    void doForTableRowStart(TableContent content);
 
-    /**
-     * called at the end of the current composite
-     * @param content
-     */
-    void end(CompositeContent content);
+    void doForTableRowEnd(TableContent content);
 
     /**
      * action if a text is encountered

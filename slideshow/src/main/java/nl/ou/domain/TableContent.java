@@ -23,13 +23,13 @@ public class TableContent implements CompositeContent {
 
     @Override
     public void accept(ContentVisitor visitor) {
-        visitor.startTable(this);
+        visitor.doForTableRowStart(this);
         table.forEach(list -> {
-            visitor.startTableRow(this);
+            visitor.doForTableRowStart(null);
             list.forEach(c -> c.accept(visitor));
-            visitor.end(this);
+            visitor.doForTableRowEnd(null);
         });
-        visitor.end(this);
+        visitor.doForTableEnd(this);
     }
 
     private class TableIterator implements Iterator<Content> {

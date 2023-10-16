@@ -55,8 +55,8 @@ public class FrameEntryPoint {
             }
         });
         next.setText("Next");
-        panel.add(next);
         panel.add(previous);
+        panel.add(next);
         frame.setVisible(true);
         frame.setAutoRequestFocus(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

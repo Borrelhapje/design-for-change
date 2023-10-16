@@ -26,9 +26,9 @@ public class ListContent implements CompositeContent {
 
     @Override
     public void accept(ContentVisitor visitor) {
-        visitor.startList(this);
+        visitor.doForListStart(this);
         elements.forEach(c -> c.accept(visitor));
-        visitor.end(this);
+        visitor.doForListEnd(this);
     }
     
 }

@@ -37,7 +37,7 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     }
     
     @Override
-    public void startList(ListContent content) {
+    public void doForListStart(ListContent content) {
         final var layout = new GridLayout(0, 1);
         final var list = new JPanel(layout);
         current.add(list);     
@@ -45,7 +45,7 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     }
 
     @Override
-    public void startTable(TableContent content) {
+    public void doForTableStart(TableContent content) {
         final var layout = new GridLayout(0, 1);
         final var table = new JPanel(layout);
         current.add(table);
@@ -53,7 +53,7 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     }
     
     @Override
-    public void startTableRow(TableContent content) {
+    public void doForTableRowStart(TableContent content) {
         final var layout = new GridLayout(1, 0);
         final var row = new JPanel(layout);
         current.add(row);
@@ -61,8 +61,18 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     }
 
     @Override
-    public void end(CompositeContent content) {
-        current = (JComponent) current.getParent();
+    public void doForListEnd(ListContent content) {
+        end();
+    }
+
+    @Override
+    public void doForTableEnd(TableContent content) {
+        end();
+    }
+
+    @Override
+    public void doForTableRowEnd(TableContent content) {
+        end();
     }
     
     @Override
@@ -73,5 +83,9 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     @Override
     public JComponent getComponent() {
         return panel;
-    }   
+    }
+    
+    private void end() {
+        current = (JComponent) current.getParent();
+    }
 }

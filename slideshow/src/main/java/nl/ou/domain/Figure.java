@@ -15,5 +15,14 @@ public class Figure implements Content{
     public Optional<CompositeContent> getComposite() {
         return Optional.empty();
     }
+
+    public URI getSource() {
+        return source;
+    }
+
+    @Override
+    public void accept(ContentVisitor visitor) {
+        visitor.doForFigure(this);
+    }
     
 }

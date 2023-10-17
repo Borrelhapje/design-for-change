@@ -23,5 +23,12 @@ public class ListContent implements CompositeContent {
     public Optional<CompositeContent> getComposite() {
         return Optional.of(this);
     }
+
+    @Override
+    public void accept(ContentVisitor visitor) {
+        visitor.doForListStart(this);
+        elements.forEach(c -> c.accept(visitor));
+        visitor.doForListEnd(this);
+    }
     
 }

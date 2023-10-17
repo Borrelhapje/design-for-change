@@ -21,11 +21,20 @@ public class TableContent implements CompositeContent {
         return new TableIterator();
     }
 
+    @Override
+    public void accept(ContentVisitor visitor) {
+        visitor.doForTableRowStart(this);
+        table.forEach(list -> {
+            visitor.doForTableRowStart(null);
+            list.forEach(c -> c.accept(visitor));
+            visitor.doForTableRowEnd(null);
+        });
+        visitor.doForTableEnd(this);
+    }
+
     private class TableIterator implements Iterator<Content> {
 
         private Iterator<Iterator<Content>> iterator;
-        private int row;
-        private int column;
 
         @Override
         public Content current() {

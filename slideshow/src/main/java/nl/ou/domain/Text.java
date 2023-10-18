@@ -5,6 +5,7 @@ import java.util.Optional;
 public class Text implements Content{
     
     private String text;
+    private Content parent;
 
     public Text(String text) {
         this.text = text;
@@ -24,4 +25,12 @@ public class Text implements Content{
         visitor.doForText(this);
     }
 
+    public void setParent(Content parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public Content getParent() {
+        return parent;
+    }
 }

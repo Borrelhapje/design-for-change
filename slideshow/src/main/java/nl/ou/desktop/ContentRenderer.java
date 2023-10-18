@@ -1,15 +1,14 @@
 package nl.ou.desktop;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.net.MalformedURLException;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import nl.ou.domain.CompositeContent;
 import nl.ou.domain.ContentVisitor;
 import nl.ou.domain.Figure;
 import nl.ou.domain.ListContent;
@@ -35,13 +34,25 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
             throw new RuntimeException(ex);
         }
     }
-    
+
     @Override
     public void doForListStart(ListContent content) {
-        final var layout = new GridLayout(0, 1);
-        final var list = new JPanel(layout);
-        current.add(list);     
+        int level = content.getLevel();
+        final var listPanelLayout = new FlowLayout();
+        final var listPanel = new JPanel(listPanelLayout);
+        for (int i = 0; i < level; i++) {
+            listPanel.add(new JLabel(" "));
+        }
+        final var listItemsLayout = new GridLayout(0, 1);
+        final var list = new JPanel(listItemsLayout);
+        listPanel.add(list);
+        current.add(listPanel);
         current = list;
+    }
+
+    @Override
+    public void doForListEnd(ListContent content) {
+        this.current = (JComponent) current.getParent().getParent();
     }
 
     @Override
@@ -58,11 +69,6 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
         final var row = new JPanel(layout);
         current.add(row);
         current = row;
-    }
-
-    @Override
-    public void doForListEnd(ListContent content) {
-        end();
     }
 
     @Override

@@ -4,6 +4,7 @@ import nl.ou.domain.*;
 import nl.ou.services.AbstractContentFactory;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.List;
 
 public class SimpleContentFactory extends AbstractContentFactory {
@@ -14,7 +15,9 @@ public class SimpleContentFactory extends AbstractContentFactory {
 
     @Override
     public ListContent createList(List<Content> listItems, boolean bulleted) {
-        return new ListContent(listItems, bulleted);
+        ListContent listContent = new ListContent(listItems, bulleted);
+        listItems.forEach(li -> li.setParent(listContent));
+        return listContent;
     }
 
     @Override
@@ -24,6 +27,10 @@ public class SimpleContentFactory extends AbstractContentFactory {
 
     @Override
     public TableContent createTable(List<List<Content>> tableItems) {
-        return new TableContent(tableItems);
+        TableContent tableContent = new TableContent(tableItems);
+        tableItems.stream()
+                .flatMap(Collection::stream)
+                .forEach(ti -> ti.setParent(tableContent));
+        return tableContent;
     }
 }

@@ -9,6 +9,7 @@ public class ListContent implements CompositeContent {
 
     private List<Content> elements;
     private boolean bulleted;
+    private Content parent;
 
     public ListContent(List<Content> elements, boolean bulleted) {
         this.elements = elements;
@@ -30,5 +31,23 @@ public class ListContent implements CompositeContent {
         elements.forEach(c -> c.accept(visitor));
         visitor.doForListEnd(this);
     }
-    
+
+    public void setParent(Content parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public Content getParent() {
+        return parent;
+    }
+
+    public int getLevel() {
+        int level = 0;
+        Content predecessor = parent;
+        while (predecessor != null && predecessor instanceof ListContent) {
+            level++;
+            predecessor = predecessor.getParent();
+        }
+        return level;
+    }
 }

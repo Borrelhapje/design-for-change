@@ -6,6 +6,7 @@ import java.util.Optional;
 public class TableContent implements CompositeContent {
 
     private List<List<Content>> table;
+    private Content parent;
 
     public TableContent(List<List<Content>> table) {
         this.table = table;
@@ -30,6 +31,15 @@ public class TableContent implements CompositeContent {
             visitor.doForTableRowEnd(null);
         });
         visitor.doForTableEnd(this);
+    }
+
+    public void setParent(Content parent) {
+        this.parent = parent;
+    }
+
+    @Override
+    public Content getParent() {
+        return parent;
     }
 
     private class TableIterator implements Iterator<Content> {

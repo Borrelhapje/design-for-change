@@ -3,7 +3,6 @@ package nl.ou.desktop;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.net.MalformedURLException;
-import java.util.Stack;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;

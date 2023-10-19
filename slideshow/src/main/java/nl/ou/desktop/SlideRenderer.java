@@ -1,5 +1,6 @@
 package nl.ou.desktop;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -11,6 +12,7 @@ public class SlideRenderer implements ComponentCreator {
 
     SlideRenderer(Slide slide) {
         final var panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         this.component = panel;
         final var contentRenderer = new ContentRenderer();
         slide.getContent().accept(contentRenderer);

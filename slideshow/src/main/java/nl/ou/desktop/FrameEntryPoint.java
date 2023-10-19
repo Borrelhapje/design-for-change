@@ -1,9 +1,11 @@
 package nl.ou.desktop;
 
+import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -38,6 +40,7 @@ public class FrameEntryPoint {
             }
         });
         final var panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         frame.add(panel);
         previous = new JButton(new AbstractAction() {
 
@@ -55,8 +58,10 @@ public class FrameEntryPoint {
             }
         });
         next.setText("Next");
-        panel.add(previous);
-        panel.add(next);
+        final var buttonPanel = new JPanel(new FlowLayout());
+        buttonPanel.add(previous);
+        buttonPanel.add(next);
+        panel.add(buttonPanel);
         frame.setVisible(true);
         frame.setAutoRequestFocus(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

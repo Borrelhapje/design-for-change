@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import nl.ou.domain.ContentVisitor;
 import nl.ou.domain.Figure;
 import nl.ou.domain.ListContent;
+import nl.ou.domain.ListLevelTracker;
 import nl.ou.domain.TableContent;
 import nl.ou.domain.Text;
 
@@ -20,13 +21,12 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
 
     private final JPanel panel;
     private JComponent current;
-    private final Stack<Integer> listLevels;
+    private final ListLevelTracker listLevelTracker;
 
     ContentRenderer() {
         panel = new JPanel();
         current = panel;
-        listLevels = new Stack<>();
-        listLevels.push(0);
+        listLevelTracker = new ListLevelTracker();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
 
     @Override
     public void doForListStart(ListContent content) {
-        int level = listLevels.peek();
+        int level = listLevelTracker.getCurrentListLevel();
         final var listPanelLayout = new FlowLayout();
         final var listPanel = new JPanel(listPanelLayout);
         for (int i = 0; i < level; i++) {
@@ -52,13 +52,13 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
         listPanel.add(list);
         current.add(listPanel);
         current = list;
-        incListLevel();
+        listLevelTracker.incListLevel();
     }
 
     @Override
     public void doForListEnd(ListContent content) {
         this.current = (JComponent) current.getParent().getParent();
-        decListLevel();
+        listLevelTracker.decListLevel();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
         final var table = new JPanel(layout);
         current.add(table);
         current = table;
-        saveAndResetListLevel();
+        listLevelTracker.saveAndResetListLevel();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     @Override
     public void doForTableEnd(TableContent content) {
         end();
-        restoreListLevel();
+        listLevelTracker.restoreListLevel();
     }
 
     @Override
@@ -101,21 +101,5 @@ public class ContentRenderer implements ContentVisitor, ComponentCreator {
     
     private void end() {
         current = (JComponent) current.getParent();
-    }
-
-    private void incListLevel() {
-        listLevels.push(listLevels.pop() + 1);
-    }
-
-    private void decListLevel() {
-        listLevels.push(listLevels.pop() - 1);
-    }
-
-    private void saveAndResetListLevel() {
-        listLevels.push(0);
-    }
-
-    private void restoreListLevel() {
-        listLevels.pop();
     }
 }

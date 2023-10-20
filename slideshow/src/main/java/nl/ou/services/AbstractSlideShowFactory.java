@@ -2,6 +2,7 @@ package nl.ou.services;
 
 import nl.ou.domain.Sequence;
 import nl.ou.domain.Slide;
+import nl.ou.domain.SlideMeta;
 import nl.ou.domain.SlideShow;
 import nl.ou.domain.SlideshowMeta;
 import nl.ou.services.impl.SimpleSlideShowFactory;
@@ -12,13 +13,16 @@ import java.util.List;
 public abstract class AbstractSlideShowFactory {
     private static AbstractSlideShowFactory SLIDE_SHOW_FACTORY;
 
-    public abstract SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides, boolean addTitleSlide,
-            boolean addTOCSlide);
+    public abstract SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides);
     
-    public abstract SlideShow createSlideShowWithSequences(SlideshowMeta meta, List<Slide> slides, List<Sequence> sequences, boolean addTitleSlide,
-            boolean addTOCSlide);
+    public abstract SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides, List<Sequence> sequences);
 
-    public abstract SlideshowMeta createSlideShowMeta(String title, String subtitle, String presenter, LocalDate presentationDate);
+    public abstract SlideshowMeta createSlideShowMeta(String title, String subtitle, String presenter,
+            LocalDate presentationDate);
+    
+    public abstract Slide createTOCSlide(List<SlideMeta> metas);
+
+    public abstract Slide createTitleSlide(SlideshowMeta meta);
 
     public static AbstractSlideShowFactory getSlideShowFactory() {
         if (SLIDE_SHOW_FACTORY == null) {

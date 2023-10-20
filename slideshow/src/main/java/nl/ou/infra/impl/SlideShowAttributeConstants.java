@@ -15,4 +15,6 @@ public class SlideShowAttributeConstants {
     public static String ITEMS = "items";
     public static String ROWS = "rows";
     public static String URL = "url";
+    public static String KEY = "key";
+    public static String DESCRIPTION = "description";
 }

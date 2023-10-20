@@ -3,8 +3,6 @@ package nl.ou.services.impl;
 import nl.ou.domain.*;
 import nl.ou.domain.impl.NormalSlide;
 import nl.ou.domain.impl.SimpleSlideMeta;
-import nl.ou.domain.impl.TitleSlide;
-import nl.ou.domain.impl.TocSlide;
 import nl.ou.services.AbstractSlideFactory;
 
 public class SimpleSlideFactory extends AbstractSlideFactory {

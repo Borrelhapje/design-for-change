@@ -4,5 +4,7 @@ public interface SlideShow {
 
     Iterator<Slide> getSlideIterator();
 
-    SlideshowMeta getMeta();    
+    SlideshowMeta getMeta();
+
+    Iterator<Sequence> getSequences();
 }

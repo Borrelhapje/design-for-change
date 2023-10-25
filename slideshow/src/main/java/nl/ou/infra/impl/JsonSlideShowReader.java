@@ -58,6 +58,7 @@ public class JsonSlideShowReader implements SlideShowReader {
             slides.add(0, slideShowFactory.createTitleSlide(slideshowMeta));
         }
         List<Sequence> sequences = sequencesFromJSON(jsonSlides, slides);
+        // sequences.add(0, new SimpleSequence("Complete slideshow containing all slides in order", "complete", slides));
         return slideShowFactory.createSlideShow(slideshowMeta, slides, sequences);
     }
 

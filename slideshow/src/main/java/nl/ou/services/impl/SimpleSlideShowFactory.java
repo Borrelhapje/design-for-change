@@ -12,7 +12,6 @@ import nl.ou.domain.impl.TocSlide;
 import nl.ou.services.AbstractSlideShowFactory;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,9 +24,7 @@ public class SimpleSlideShowFactory extends AbstractSlideShowFactory {
     
     @Override
     public SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides, List<Sequence> sequences) {
-        List<Slide> allSlides = new ArrayList<>();
-        allSlides.addAll(slides);
-        return new SlideShowImpl(allSlides, sequences, meta);
+        return new SlideShowImpl(sequences, meta);
     }
 
     @Override

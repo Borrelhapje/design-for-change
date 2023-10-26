@@ -14,6 +14,16 @@
         2,
         3,
         5
+      ]},
+    {
+      "key": "allSlides",
+      "description": "For the sci-fi literate audience",
+      "slides": [
+        1,
+        2,
+        3,
+        4,
+        5
       ]}
   ],
   "slides": [

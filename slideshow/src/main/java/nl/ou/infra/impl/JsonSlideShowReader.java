@@ -57,8 +57,7 @@ public class JsonSlideShowReader implements SlideShowReader {
         if (addTitleSlide) {
             slides.add(0, slideShowFactory.createTitleSlide(slideshowMeta));
         }
-        List<Sequence> sequences = sequencesFromJSON(jsonSlides, slides);
-        // sequences.add(0, new SimpleSequence("Complete slideshow containing all slides in order", "complete", slides));
+        List<Sequence> sequences = sequencesFromJSON(slideShowJson.getJSONArray("sequences"), slides);
         return slideShowFactory.createSlideShow(slideshowMeta, slides, sequences);
     }
 
@@ -85,7 +84,7 @@ public class JsonSlideShowReader implements SlideShowReader {
         JSONArray slideNumbers = sequence.getJSONArray(SLIDES);
         List<Slide> includedSlides = new ArrayList<>(slideNumbers.length());
         for (var number : slideNumbers) {
-            includedSlides.add(slides.get((Integer) number));
+            includedSlides.add(slides.get(((Integer) number) - 1));
         }
         return new SimpleSequence(description, key, includedSlides);
     }

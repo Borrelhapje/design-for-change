@@ -11,8 +11,17 @@ Make a design for the entities in the domain of slide shows.
 | Type | Responsibility | Comments | Remarks |
 |------|----------------|----------|---------|
 | Know | its slides |  |  |
-|  | its meta information |  |  |
+|      | its meta information |  |  |
+|      | its sequences | | | 
 | Can  | supply slide iterator                  |  |  |
+|      | supply sequence iterator | | |
+
+## Sequence
+| Type | Responsibility | Comments | Remarks |
+|------|----------------|----------|---------|
+| Know | its key | | |
+|      | its description | | |
+|      | which slides it refers to | | | 
 
 ## Slide Iterator
 
@@ -66,7 +75,16 @@ classDiagram
         <<abstract>>
         +getSlideIterator(): Iterator of Slide
         +getMeta()
+        +getSequences(): Iterator of Sequence
     }
+
+class Sequence {
+    <<abstract>>
+    +getKey(): string
+    +getDescription(): string
+    +getSlides: Iterator of Slide
+}
+
 class Slide{
         <<abstract>>
         +getMeta(): SlideMeta
@@ -77,6 +95,8 @@ class Content{
 }
 
 SlideShow "1" <-- "*" Slide: slides
+SlideShow "1" <-- "*" Sequence: sequences
+Sequence "1" <-- "*" Slide: slides
 Slide "1" <-- "1" Content: content
 ```
 

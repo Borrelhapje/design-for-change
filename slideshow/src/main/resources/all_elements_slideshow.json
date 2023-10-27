@@ -5,6 +5,27 @@
   "date": "2023-02-28",
   "showTitleSlide": true,
   "showTOCSlide": true,
+  "sequences": [
+    {
+      "key": "withoutImage",
+      "description": "For the young audience which does not understand star trek",
+      "slides": [
+        1,
+        2,
+        3,
+        5
+      ]},
+    {
+      "key": "allSlides",
+      "description": "For the sci-fi literate audience",
+      "slides": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]}
+  ],
   "slides": [
     {
       "title": "JabberPoint",

@@ -1,6 +1,7 @@
 package nl.ou.infra.impl;
 
 import nl.ou.domain.*;
+import nl.ou.domain.impl.SimpleSequence;
 import nl.ou.infra.SlideShowReader;
 import nl.ou.services.AbstractContentFactory;
 import nl.ou.services.AbstractSlideFactory;
@@ -15,6 +16,7 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static nl.ou.infra.impl.SlideShowAttributeConstants.*;
 
@@ -48,7 +50,15 @@ public class JsonSlideShowReader implements SlideShowReader {
         boolean addTitleSlide = slideShowJson.optBoolean(SHOW_TITLE_SLIDE);
         boolean addTOCSlide = slideShowJson.optBoolean(SHOW_TOC_SLIDE);
         List<Slide> slides = slidesFromJSON(jsonSlides);
-        return slideShowFactory.createSlideShow(slideshowMeta, slides, addTitleSlide, addTOCSlide);
+        if (addTOCSlide) {
+            slides.add(0,
+                    slideShowFactory.createTOCSlide(slides.stream().map(Slide::getMeta).collect(Collectors.toList())));
+        }
+        if (addTitleSlide) {
+            slides.add(0, slideShowFactory.createTitleSlide(slideshowMeta));
+        }
+        List<Sequence> sequences = sequencesFromJSON(slideShowJson.getJSONArray("sequences"), slides);
+        return slideShowFactory.createSlideShow(slideshowMeta, slides, sequences);
     }
 
     private SlideshowMeta getSlideshowMeta(JSONObject slideShowJson) {
@@ -58,6 +68,25 @@ public class JsonSlideShowReader implements SlideShowReader {
         String dateString = slideShowJson.optString(DATE, null);
         LocalDate date = dateString == null ? null : LocalDate.parse(dateString);
         return slideShowFactory.createSlideShowMeta(title, subtitle, presenter, date);
+    }
+
+    private List<Sequence> sequencesFromJSON(JSONArray sequences, List<Slide> slides) {
+        List<Sequence> result = new ArrayList<>(sequences.length());
+        for (var sequence : sequences) {
+            result.add(sequenceFromJSON((JSONObject)sequence, slides));
+        }
+        return result;
+    }
+
+    private Sequence sequenceFromJSON(JSONObject sequence, List<Slide> slides) {
+        String key = sequence.getString(KEY);
+        String description = sequence.optString(DESCRIPTION);
+        JSONArray slideNumbers = sequence.getJSONArray(SLIDES);
+        List<Slide> includedSlides = new ArrayList<>(slideNumbers.length());
+        for (var number : slideNumbers) {
+            includedSlides.add(slides.get(((Integer) number) - 1));
+        }
+        return new SimpleSequence(description, key, includedSlides);
     }
 
     private List<Slide> slidesFromJSON(JSONArray jsonSlides) {

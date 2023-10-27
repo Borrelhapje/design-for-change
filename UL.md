@@ -6,7 +6,7 @@ Develop a ubiquitous language for the domain of a slide show.
 
 | Concept | Sub concept | Meaning | Remarks |
 |---------|-------------|---------|---------|
-| slide show |  | a set of ordered sequences of the same slides |  |
+| slide show |  | a set of slides in combination with a set of sequences in which a subset of these slides can be shown |  |
 |  |  | has a title |  |
 |  |  | name(s) of presenter(s) |
 |  |  | title |

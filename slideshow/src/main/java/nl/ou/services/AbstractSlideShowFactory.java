@@ -12,8 +12,6 @@ import java.util.List;
 
 public abstract class AbstractSlideShowFactory {
     private static AbstractSlideShowFactory SLIDE_SHOW_FACTORY;
-
-    public abstract SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides);
     
     public abstract SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides, List<Sequence> sequences);
 

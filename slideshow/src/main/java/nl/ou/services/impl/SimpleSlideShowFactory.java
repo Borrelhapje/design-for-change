@@ -12,15 +12,9 @@ import nl.ou.domain.impl.TocSlide;
 import nl.ou.services.AbstractSlideShowFactory;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 public class SimpleSlideShowFactory extends AbstractSlideShowFactory {
-
-    @Override
-    public SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides) {
-        return createSlideShow(meta, slides, Collections.emptyList());
-    }
     
     @Override
     public SlideShow createSlideShow(SlideshowMeta meta, List<Slide> slides, List<Sequence> sequences) {

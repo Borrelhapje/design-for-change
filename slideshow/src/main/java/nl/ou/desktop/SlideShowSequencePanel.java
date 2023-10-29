@@ -10,15 +10,18 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+import java.awt.KeyboardFocusManager;
 
 public class SlideShowSequencePanel extends JPanel {
 
     private final Iterator<Slide> iterator;
+    private final GUIFacade facade;
     private JButton next;
     private JButton previous;
     private JComponent slideShower;
 
     public SlideShowSequencePanel(GUIFacade facade) {
+        this.facade = facade;
         this.iterator = facade.getSlideshow().getSlideIterator();
         render();
         onSlideChange();
@@ -46,6 +49,7 @@ public class SlideShowSequencePanel extends JPanel {
         buttonPanel.add(previous);
         buttonPanel.add(next);
         add(buttonPanel);
+        registerStopKeyListener();
     }
 
     private void onSlideChange() {
@@ -60,5 +64,17 @@ public class SlideShowSequencePanel extends JPanel {
         revalidate();
         repaint();
         setVisible(true);
+    }
+
+    private void registerStopKeyListener() {
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventPostProcessor(e -> {
+            if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
+                facade.getStopStrategy().stop();
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 }

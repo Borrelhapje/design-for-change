@@ -23,7 +23,7 @@ public class TableContent implements CompositeContent {
 
     @Override
     public void accept(ContentVisitor visitor) {
-        visitor.doForTableRowStart(this);
+        visitor.doForTableStart(this);
         table.forEach(list -> {
             visitor.doForTableRowStart(null);
             list.forEach(c -> c.accept(visitor));

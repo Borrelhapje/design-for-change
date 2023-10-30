@@ -2,7 +2,6 @@ package nl.ou.desktop;
 
 import nl.ou.domain.Iterator;
 import nl.ou.domain.Slide;
-import nl.ou.services.GUIFacade;
 
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
@@ -15,14 +14,14 @@ import java.awt.KeyboardFocusManager;
 public class SlideShowSequencePanel extends JPanel {
 
     private final Iterator<Slide> iterator;
-    private final GUIFacade facade;
+    private final FrameEntryPoint frameEntryPoint;
     private JButton next;
     private JButton previous;
     private JComponent slideShower;
 
-    public SlideShowSequencePanel(GUIFacade facade) {
-        this.facade = facade;
-        this.iterator = facade.getSlideshow().getSlideIterator();
+    public SlideShowSequencePanel(FrameEntryPoint frameEntryPoint) {
+        this.frameEntryPoint = frameEntryPoint;
+        this.iterator = frameEntryPoint.getSlideIterator();
         render();
         onSlideChange();
     }
@@ -63,14 +62,13 @@ public class SlideShowSequencePanel extends JPanel {
         add(slideShower);
         revalidate();
         repaint();
-        setVisible(true);
     }
 
     private void registerStopKeyListener() {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventPostProcessor(e -> {
             if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-                facade.getStopStrategy().stop();
+                frameEntryPoint.stop();
                 return true;
             } else {
                 return false;

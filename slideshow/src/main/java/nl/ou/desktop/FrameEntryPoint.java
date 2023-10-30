@@ -12,6 +12,7 @@ public class FrameEntryPoint {
 
     private final GUIFacade facade;
     private JPanel contentPanel;
+    private Sequence currentSequence;
 
     public FrameEntryPoint(GUIFacade facade) {
         this.facade = facade;
@@ -33,16 +34,24 @@ public class FrameEntryPoint {
         contentPanel.removeAll();
         SequenceSelectionPanel sequenceSelectionPanel = new SequenceSelectionPanel(this);
         contentPanel.add(sequenceSelectionPanel);
+        sequenceSelectionPanel.render();
     }
 
     public void showSlideShow(Sequence sequence) {
+        this.currentSequence = sequence;
         contentPanel.removeAll();
         SlideShowSequencePanel slideShowSequencePanel = new SlideShowSequencePanel(this);
         contentPanel.add(slideShowSequencePanel);
+        contentPanel.revalidate();
+        contentPanel.repaint();
+    }
+
+    public Iterator<Sequence> getSequences() {
+        return facade.getSlideshow().getSequences();
     }
 
     public Iterator<Slide> getSlideIterator() {
-        return facade.getSlideshow().getSlideIterator();
+        return currentSequence.getSlides();
     }
 
     public void stop() {

@@ -23,7 +23,10 @@ public class SlideShowSequencePanel extends JPanel {
         this.frameEntryPoint = frameEntryPoint;
         this.iterator = frameEntryPoint.getSlideIterator();
         render();
-        onSlideChange();
+        if (iterator.hasNext()) {
+            iterator.next();
+            onSlideChange();
+        }
     }
 
     private void render() {
@@ -36,6 +39,7 @@ public class SlideShowSequencePanel extends JPanel {
             }
         });
         previous.setText("Back");
+        previous.setEnabled(false);
         next = new JButton(new AbstractAction() {
 
             public void actionPerformed(java.awt.event.ActionEvent event) {
@@ -44,6 +48,7 @@ public class SlideShowSequencePanel extends JPanel {
             }
         });
         next.setText("Next");
+        next.setEnabled(false);
         final var buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.add(previous);
         buttonPanel.add(next);

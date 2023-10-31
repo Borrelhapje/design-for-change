@@ -1,6 +1,5 @@
 package nl.ou;
 
-import nl.ou.desktop.FrameEntryPoint;
 import nl.ou.domain.SlideShow;
 import nl.ou.infra.SlideReaderFactory;
 import nl.ou.infra.SlideShowReader;
@@ -23,7 +22,7 @@ public class JabberPoint {
         try (InputStream inputStream = ClassLoader.getSystemResourceAsStream(fileName)) {
             SlideShow slideShow = slideReader.readSlideShow(inputStream);
             System.out.println(slideShow);
-            new FrameEntryPoint(AbstractGUIFacadeFactory.getFactory().create(slideShow));
+            AbstractGUIFacadeFactory.getFactory().create(slideShow).showSequenceSelection();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

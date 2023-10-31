@@ -12,7 +12,7 @@ public class ListIterator<T> implements Iterator<T> {
     }
     
     private List<T> slides;
-    private int position;
+    private int position = -1;
         @Override
         public T current() {
             return slides.get(position);

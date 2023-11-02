@@ -4,7 +4,7 @@ import nl.ou.domain.Iterator;
 import nl.ou.domain.Sequence;
 import nl.ou.domain.Slide;
 import nl.ou.domain.SlideShow;
-import nl.ou.domain.StopStrategy;
+import nl.ou.services.StopStrategy;
 import nl.ou.services.GUIFacade;
 
 import javax.swing.JFrame;

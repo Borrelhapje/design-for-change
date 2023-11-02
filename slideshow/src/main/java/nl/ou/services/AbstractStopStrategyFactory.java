@@ -1,6 +1,5 @@
 package nl.ou.services;
 
-import nl.ou.domain.StopStrategy;
 import nl.ou.services.impl.SelectSequenceStopStrategyFactory;
 import nl.ou.services.impl.SimpleStopStrategyFactory;
 

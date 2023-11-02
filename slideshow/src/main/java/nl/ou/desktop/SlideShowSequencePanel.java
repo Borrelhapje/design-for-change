@@ -20,7 +20,7 @@ public class SlideShowSequencePanel extends JPanel {
     private JButton previous;
     private JComponent slideShower;
 
-    public SlideShowSequencePanel(SwingGUIFacade guiFacade) {
+    public SlideShowSequencePanel(GUIFacade guiFacade) {
         this.guiFacade = guiFacade;
         this.iterator = guiFacade.getSlideIterator();
         render();

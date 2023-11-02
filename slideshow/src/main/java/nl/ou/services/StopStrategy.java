@@ -1,6 +1,4 @@
-package nl.ou.domain;
-
-import nl.ou.services.GUIFacade;
+package nl.ou.services;
 
 public interface StopStrategy {
 

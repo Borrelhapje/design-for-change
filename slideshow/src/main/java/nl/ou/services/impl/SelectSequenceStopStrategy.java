@@ -1,6 +1,6 @@
 package nl.ou.services.impl;
 
-import nl.ou.domain.StopStrategy;
+import nl.ou.services.StopStrategy;
 import nl.ou.services.GUIFacade;
 
 public class SelectSequenceStopStrategy implements StopStrategy {

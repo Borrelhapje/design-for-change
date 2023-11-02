@@ -119,19 +119,19 @@ Slide "1" <-- "1" Content: content
 ```mermaid
 classDiagram
 class Content{
-	<<abstract>>
+	<<Interface>>
 	+getComposite(): CompositeContent|null
 }
 class CompositeContent{
-	-elements : Vector of Content
+    <<Interface>>
     +getIterator():Iterator of Content
 }
 class List{
     -bulleted: boolean
+    +getIterator():Iterator of Content
 }
 class Table{
-    -rowCount: int
-    -columnCount: int
+    +getIterator():Iterator of Content
 }
 class Figure{
     -source: URL

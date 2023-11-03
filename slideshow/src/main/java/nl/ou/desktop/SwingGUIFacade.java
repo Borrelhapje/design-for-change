@@ -3,25 +3,29 @@ package nl.ou.desktop;
 import nl.ou.domain.Iterator;
 import nl.ou.domain.Sequence;
 import nl.ou.domain.Slide;
+import nl.ou.domain.SlideShow;
+import nl.ou.services.StopStrategy;
 import nl.ou.services.GUIFacade;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class FrameEntryPoint {
+public class SwingGUIFacade implements GUIFacade {
 
-    private final GUIFacade facade;
+    private final SlideShow slideShow;
+    private final StopStrategy stopStrategy;
     private JPanel contentPanel;
     private Sequence currentSequence;
 
-    public FrameEntryPoint(GUIFacade facade) {
-        this.facade = facade;
+    public SwingGUIFacade(SlideShow slideShow, StopStrategy stopStrategy) {
+        this.slideShow = slideShow;
+        this.stopStrategy = stopStrategy;
         renderFrame();
         showSequenceSelection();
     }
 
     private void renderFrame() {
-        var frame = new JFrame("JabberPoint " + facade.getSlideshow().getMeta().getTitle());
+        var frame = new JFrame("JabberPoint " + slideShow.getMeta().getTitle());
         frame.setVisible(true);
         frame.setAutoRequestFocus(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -35,6 +39,8 @@ public class FrameEntryPoint {
         SequenceSelectionPanel sequenceSelectionPanel = new SequenceSelectionPanel(this);
         contentPanel.add(sequenceSelectionPanel);
         sequenceSelectionPanel.render();
+        contentPanel.revalidate();
+        contentPanel.repaint();
     }
 
     public void showSlideShow(Sequence sequence) {
@@ -47,7 +53,7 @@ public class FrameEntryPoint {
     }
 
     public Iterator<Sequence> getSequences() {
-        return facade.getSlideshow().getSequences();
+        return slideShow.getSequences();
     }
 
     public Iterator<Slide> getSlideIterator() {
@@ -55,6 +61,6 @@ public class FrameEntryPoint {
     }
 
     public void stop() {
-        facade.getStopStrategy().stop();
+        stopStrategy.stop(this);
     }
 }

@@ -1,11 +1,18 @@
 package nl.ou.services;
 
-import nl.ou.domain.SlideShow;
-import nl.ou.domain.StopStrategy;
+import nl.ou.domain.Iterator;
+import nl.ou.domain.Sequence;
+import nl.ou.domain.Slide;
 
 public interface GUIFacade {
 
-    SlideShow getSlideshow();
+    Iterator<Sequence> getSequences();
 
-    StopStrategy getStopStrategy();    
+    void showSequenceSelection();
+
+    void showSlideShow(Sequence sequence);
+
+    Iterator<Slide> getSlideIterator();
+
+    void stop();
 }

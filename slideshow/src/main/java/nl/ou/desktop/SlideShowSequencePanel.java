@@ -2,6 +2,7 @@ package nl.ou.desktop;
 
 import nl.ou.domain.Iterator;
 import nl.ou.domain.Slide;
+import nl.ou.services.GUIFacade;
 
 import javax.swing.AbstractAction;
 import javax.swing.BoxLayout;
@@ -14,14 +15,14 @@ import java.awt.KeyboardFocusManager;
 public class SlideShowSequencePanel extends JPanel {
 
     private final Iterator<Slide> iterator;
-    private final FrameEntryPoint frameEntryPoint;
+    private final GUIFacade guiFacade;
     private JButton next;
     private JButton previous;
     private JComponent slideShower;
 
-    public SlideShowSequencePanel(FrameEntryPoint frameEntryPoint) {
-        this.frameEntryPoint = frameEntryPoint;
-        this.iterator = frameEntryPoint.getSlideIterator();
+    public SlideShowSequencePanel(GUIFacade guiFacade) {
+        this.guiFacade = guiFacade;
+        this.iterator = guiFacade.getSlideIterator();
         render();
         if (iterator.hasNext()) {
             iterator.next();
@@ -73,7 +74,7 @@ public class SlideShowSequencePanel extends JPanel {
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         manager.addKeyEventPostProcessor(e -> {
             if (e.getKeyChar() == 'q' || e.getKeyChar() == 'Q') {
-                frameEntryPoint.stop();
+                guiFacade.stop();
                 return true;
             } else {
                 return false;

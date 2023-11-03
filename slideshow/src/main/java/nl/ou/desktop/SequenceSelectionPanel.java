@@ -2,6 +2,7 @@ package nl.ou.desktop;
 
 import nl.ou.domain.Iterator;
 import nl.ou.domain.Sequence;
+import nl.ou.services.GUIFacade;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -10,15 +11,15 @@ import javax.swing.JPanel;
 import java.awt.Button;
 
 public class SequenceSelectionPanel extends JPanel {
-    private final FrameEntryPoint frameEntryPoint;
+    private final GUIFacade guiFacade;
 
-    public SequenceSelectionPanel(FrameEntryPoint frameEntryPoint) {
-        this.frameEntryPoint = frameEntryPoint;
+    public SequenceSelectionPanel(GUIFacade guiFacade) {
+        this.guiFacade = guiFacade;
     }
 
     void render() {
         DefaultComboBoxModel<Sequence> comboBoxModel = new DefaultComboBoxModel<>();
-        Iterator<Sequence> sequences = frameEntryPoint.getSequences();
+        Iterator<Sequence> sequences = guiFacade.getSequences();
         while (sequences.hasNext()) {
             sequences.next();
             comboBoxModel.addElement(sequences.current());
@@ -29,7 +30,7 @@ public class SequenceSelectionPanel extends JPanel {
         Button startButton = new Button("Start");
         startButton.addActionListener(e -> {
             if (comboBoxModel.getSelectedItem() != null) {
-                frameEntryPoint.showSlideShow((Sequence) comboBoxModel.getSelectedItem());
+                guiFacade.showSlideShow((Sequence) comboBoxModel.getSelectedItem());
             }
         });
         add(startButton);

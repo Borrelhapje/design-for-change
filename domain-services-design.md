@@ -82,3 +82,25 @@ classDiagram
     SlideFactory <|-- SimpleSlideFactory
     ContentFactory <|-- SimpleContentFactory
 ~~~
+
+## GUI
+### GUIFacade
+| Type | Responsibility                                                            | Comments | Remarks |
+|------|---------------------------------------------------------------------------|----------|---------|
+| Know | SlideShow                                                                 |          |         |
+| Can  | Present the slides from a slide show                                      |          |         |
+|      | Call the stop action from a stop strategy implementation                  |          |         |
+
+~~~mermaid
+classDiagram
+    class GUIFacade {
+        <<interface>>
+        +showSlideShow()
+    }
+
+    class SwingGUIFacade {
+        +showSlideShow()
+    }
+
+    GUIFacade <|-- SwingGUIFacade
+~~~

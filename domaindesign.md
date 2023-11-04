@@ -105,6 +105,7 @@ Slide "1" <-- "1" Content: content
 - Design pattern **Composite** for content and its subtypes.
 - **Iterator** to navigate through these
 - It is a possibility to include Slide and even SlideShow into the Composite hierarchy. We decided against that, because we see too much difference between Slide/SlideShow and the other Components and too little shared functionality.
+- **Visitor** to implement features that need to act upon the specific subclasses of Content, where we do not want to add the funcionality to the Content classes themselves. For example showing content in a GUI.
 
 ### Mapping for Composite
 
@@ -119,19 +120,19 @@ Slide "1" <-- "1" Content: content
 ```mermaid
 classDiagram
 class Content{
-	<<abstract>>
+	<<Interface>>
 	+getComposite(): CompositeContent|null
 }
 class CompositeContent{
-	-elements : Vector of Content
+    <<Interface>>
     +getIterator():Iterator of Content
 }
 class List{
     -bulleted: boolean
+    +getIterator():Iterator of Content
 }
 class Table{
-    -rowCount: int
-    -columnCount: int
+    +getIterator():Iterator of Content
 }
 class Figure{
     -source: URL
@@ -195,6 +196,31 @@ class SlideIterator {
     Iterator <|-- ContentIterator
     ContentIterator <|-- ListIterator
     ContentIterator <|-- TableIterator
+```
+
+```mermaid
+classDiagram
+    class ContentVisitor {
+        <<Interface>>
+        +doForListStart(ListContent)
+        +doForListEnd(ListContent)
+        +doForTableStart(TableContent)
+        +doForTableEnd(TableContent)
+        +doForTableRowStart(TableContent)
+        +doForTableRowEnd(TableContent)
+        +doForText(Text)
+        +doForFigure(Figure)
+    }
+
+    class ContentRenderer {
+        
+    }
+
+    class Content {
+        +accept(ContentVisitor)
+    }
+
+    ContentVisitor <|-- ContentRenderer
 ```
 
 ## Rules

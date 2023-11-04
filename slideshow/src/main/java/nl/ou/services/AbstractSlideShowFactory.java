@@ -18,9 +18,7 @@ public abstract class AbstractSlideShowFactory {
     public abstract SlideshowMeta createSlideShowMeta(String title, String subtitle, String presenter,
             LocalDate presentationDate);
     
-    public abstract Slide createTOCSlide(List<SlideMeta> metas);
 
-    public abstract Slide createTitleSlide(SlideshowMeta meta);
 
     public static AbstractSlideShowFactory getSlideShowFactory() {
         if (SLIDE_SHOW_FACTORY == null) {

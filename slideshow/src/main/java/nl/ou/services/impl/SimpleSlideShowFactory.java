@@ -27,13 +27,5 @@ public class SimpleSlideShowFactory extends AbstractSlideShowFactory {
         return new SimpleSlideshowMeta(title, subtitle, presenter, presentationDate);
     }
     
-    @Override
-    public Slide createTOCSlide(List<SlideMeta> metas) {
-        return new TocSlide(metas);
-    }
 
-    @Override
-    public Slide createTitleSlide(SlideshowMeta meta) {
-        return new TitleSlide(meta);
-    }
 }

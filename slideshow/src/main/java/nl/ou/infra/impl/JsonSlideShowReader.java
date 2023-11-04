@@ -52,10 +52,10 @@ public class JsonSlideShowReader implements SlideShowReader {
         List<Slide> slides = slidesFromJSON(jsonSlides);
         if (addTOCSlide) {
             slides.add(0,
-                    slideShowFactory.createTOCSlide(slides.stream().map(Slide::getMeta).collect(Collectors.toList())));
+                    slideFactory.createTOCSlide(slides.stream().map(Slide::getMeta).collect(Collectors.toList())));
         }
         if (addTitleSlide) {
-            slides.add(0, slideShowFactory.createTitleSlide(slideshowMeta));
+            slides.add(0, slideFactory.createTitleSlide(slideshowMeta));
         }
         List<Sequence> sequences = sequencesFromJSON(slideShowJson.getJSONArray("sequences"), slides);
         return slideShowFactory.createSlideShow(slideshowMeta, slides, sequences);

@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 import nl.ou.domain.SlideMeta;
 
-public class SlideMetaRenderer implements ComponentCreator {
+class SlideMetaRenderer implements ComponentCreator {
 
     private final JComponent component;
 

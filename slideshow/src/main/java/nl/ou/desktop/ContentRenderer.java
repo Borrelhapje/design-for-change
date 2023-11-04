@@ -16,7 +16,7 @@ import nl.ou.domain.ListLevelTracker;
 import nl.ou.domain.TableContent;
 import nl.ou.domain.Text;
 
-public class ContentRenderer implements ContentVisitor, ComponentCreator {
+class ContentRenderer implements ContentVisitor, ComponentCreator {
 
     private final JPanel panel;
     private JComponent current;

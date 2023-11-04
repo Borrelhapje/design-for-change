@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.awt.KeyboardFocusManager;
 
-public class SlideShowSequencePanel extends JPanel {
+class SlideShowSequencePanel extends JPanel {
 
     private final Iterator<Slide> iterator;
     private final GUIFacade guiFacade;
@@ -20,7 +20,7 @@ public class SlideShowSequencePanel extends JPanel {
     private JButton previous;
     private JComponent slideShower;
 
-    public SlideShowSequencePanel(GUIFacade guiFacade) {
+    SlideShowSequencePanel(GUIFacade guiFacade) {
         this.guiFacade = guiFacade;
         this.iterator = guiFacade.getSlideIterator();
         render();

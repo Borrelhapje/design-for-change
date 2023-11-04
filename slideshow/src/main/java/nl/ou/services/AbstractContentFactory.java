@@ -1,9 +1,6 @@
 package nl.ou.services;
 
 import nl.ou.domain.Content;
-import nl.ou.domain.Figure;
-import nl.ou.domain.ListContent;
-import nl.ou.domain.Text;
 import nl.ou.services.impl.SimpleContentFactory;
 
 import java.net.URI;
@@ -12,11 +9,11 @@ import java.util.List;
 public abstract class AbstractContentFactory {
     private static AbstractContentFactory CONTENT_FACTORY;
 
-    public abstract Text createText(String text);
+    public abstract Content createText(String text);
 
-    public abstract ListContent createList(List<Content> listItems, boolean bulleted);
+    public abstract Content createList(List<Content> listItems, boolean bulleted);
 
-    public abstract Figure createFigure(URI source);
+    public abstract Content createFigure(URI source);
 
     public abstract Content createTable(List<List<Content>> tableItems);
 

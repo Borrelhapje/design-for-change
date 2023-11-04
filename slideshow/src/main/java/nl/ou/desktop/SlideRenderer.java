@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 import nl.ou.domain.Slide;
 
-public class SlideRenderer implements ComponentCreator {
+class SlideRenderer implements ComponentCreator {
 
     private final JComponent component;
 

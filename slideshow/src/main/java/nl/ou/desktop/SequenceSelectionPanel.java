@@ -10,10 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Button;
 
-public class SequenceSelectionPanel extends JPanel {
+class SequenceSelectionPanel extends JPanel {
     private final GUIFacade guiFacade;
 
-    public SequenceSelectionPanel(GUIFacade guiFacade) {
+    SequenceSelectionPanel(GUIFacade guiFacade) {
         this.guiFacade = guiFacade;
     }
 
